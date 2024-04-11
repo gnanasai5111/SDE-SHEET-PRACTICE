@@ -54,3 +54,46 @@ class Solution {
   
 Time complexity - o(N)
 Space complexity - o(1)
+
+Optimised approach :
+
+Dutch National Flag algorithm
+
+Intuition
+
+0 to low-1 -> contains 0
+low to mid-1 -> contains 1
+mid to high->contains 0/1/2 (unsorted)
+high+1 to n-1 -> contains 2
+
+so initailly we start mid at 0 and high at end , so everything is unsorted at start , then we move pointers .
+The loop Runs till mid crosses high i.e, everything is sorted.
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int low=0,mid=0,high=nums.length-1;
+        while(mid<=high){
+            if(nums[mid]==0){
+                int temp=nums[low];
+                nums[low]=nums[mid];
+                nums[mid]=temp;
+                low++;
+                mid++;
+            }
+            else if(nums[mid]==1){
+                mid++;
+            }
+            else{
+                int temp=nums[mid];
+                nums[mid]=nums[high];
+                nums[high]=temp;
+                high--;
+            }
+
+        }
+        
+    }
+}
+
+Time complexity - o(N)
+Space complexity - o(1)
