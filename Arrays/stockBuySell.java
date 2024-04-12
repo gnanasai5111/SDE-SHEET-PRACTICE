@@ -30,3 +30,55 @@ class Solution {
 
 Time complexity - o(N*N) - Time limit exceeded
 Space complexity - o(1)
+
+Optmised approach :(Two ways one from start of array and other from end of array)
+
+From End appraoch :
+
+We start iterating from the second element from end,we will keep a track of max element towards right of it.
+If current index is greater than maxRight then its loss and we make the current index as maxRight and decrement the index.
+if current index is less than maxRight then we find the diff and repeat this process till we find max profit.
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int max=0;
+        int greatestNumOnRight=prices[prices.length-1];
+        for(int j=prices.length-2;j>=0;j--){   
+            if(greatestNumOnRight<prices[j]){
+                greatestNumOnRight=prices[j];
+            }
+            else{
+                max=Math.max(greatestNumOnRight-prices[j],max);
+            }
+        }
+        return max;
+        
+    }
+}
+
+We start iterating from the second element from start,we will keep a track of min element towards left of it.
+If current index is less than minLeft then its loss and we make the current index as minLeft and increment the index.
+if current index is greater than minLeft then we find the diff and repeat this process till we find max profit.
+
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int max=0;
+        int smallestNumOnLeft=prices[0];
+        for(int j=1;j<prices.length;j++){   
+            if(smallestNumOnLeft>prices[j]){
+               smallestNumOnLeft=prices[j];
+            }
+            else{
+                max=Math.max(prices[j]-smallestNumOnLeft,max);
+            }
+        }
+        return max;
+        
+    }
+}
+
+Time complexity - o(N)
+Space complexity - o(1)
+
+
