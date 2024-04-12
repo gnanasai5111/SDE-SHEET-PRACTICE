@@ -29,4 +29,30 @@ class Solution {
 }
 
 Time complexity - o(N*N) - Time limit exceeded
-Space complexity
+Space complexity -o(1)
+
+Optimised approah : Kadanes algorithm
+
+The intuition of the algorithm is not to consider the subarray as a part of the answer if its sum is less than 0.
+A subarray with a sum less than 0 will always reduce our answer and so this type of subarray cannot be a part of the 
+subarray with maximum sum.
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int max=Integer.MIN_VALUE;
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+            sum=sum+nums[i];
+            if(sum>max){
+                max=sum;
+            }
+            if(sum<0){
+                sum=0;
+            }        
+        }
+        return max;        
+    }
+}    
+
+Time complexity - o(N)
+Space complexity -o(1)
