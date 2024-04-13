@@ -16,6 +16,75 @@ Example 1:
 Input: nums = [1,2,3]
 Output: [1,3,2]
 
+Brute force approach(Recursion and Backtracking)
+
+- Generate all permuations
+- Sort the permutations 
+- find the next permuation in the sorted permuatation by comapring withNums if matched values are  in last index then return first permutatin
+
+
+class Solution {
+    public boolean checkIfEqual(List<Integer> inner,int nums[]){
+        for(int i=0;i<inner.size();i++){
+            if(inner.get(i)!=nums[i]){
+                return false;
+            }
+       
+        }
+        return true;
+    }
+    public void copyValues(List<Integer> inner,int nums[]){
+        for(int i=0;i<inner.size();i++){
+            nums[i]=inner.get(i);    
+        }
+    }
+    public void generateRecursions(int index,int nums[],ArrayList<Integer> inner,boolean marked[],List<List<Integer>> res){
+        if(inner.size()==nums.length){
+            res.add(new ArrayList<>(inner));
+        }
+        for(int i=0;i<nums.length;i++){
+            if(!marked[i]){
+                marked[i]=true;
+                inner.add(nums[i]);
+                generateRecursions(i,nums,inner,marked,res); 
+                marked[i]=false;
+                inner.remove(inner.size()-1);
+            }
+        }
+    }
+    public void nextPermutation(int[] nums) {
+        List<List<Integer>> res=new ArrayList<>();
+        ArrayList<Integer> inner=new ArrayList<>();
+        boolean marked[]=new boolean[nums.length];
+
+        generateRecursions(0,nums,inner,marked,res);
+        Collections.sort(res, (a, b) -> {
+        for (int i = 0; i < nums.length; i++) {
+            if (a.get(i) != b.get(i)) {
+            return Integer.compare(a.get(i), b.get(i));
+            }
+        }
+        return 0;
+        });
+        for(int i=res.size()-1;i>=0;i--){
+            if(checkIfEqual(res.get(i),nums)){
+                if(i==res.size()-1){
+                    copyValues(res.get(0),nums);
+                }
+                else{
+                    copyValues(res.get(i+1),nums);
+                }
+                break;
+            }
+        }    
+    }
+}
+
+Time complexity - o(N!*N)
+Space complexity - o(N)
+
+You can further optimise the space complexity to o(1) by generating permutations in different way
+
 Optimised approach :
 
 1. Find a breakpoint .It means find the index from back of the array when nums[i]>nums[i-1] and assign start=i-1
