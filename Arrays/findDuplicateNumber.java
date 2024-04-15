@@ -47,3 +47,42 @@ class Solution {
 
 Time complexity - o(NLogN)
 Space complexity - o(N)
+
+Optimised approach(Linked list cycle and Flyods Tortoise and hare Algorithm)
+
+Fast - hare 
+slow - tortoise
+
+Use a fast and slow pointer. And interate through the array till both fast and slow pointer intersect.
+
+Consider the distance from start to duplicate value is P.And rest of the path from duplicate value is c.
+consider the distance from intersection point to duplicate is x.
+
+so for slow pointer = p+c-x
+        fast pointer=p+2c-x
+    2*slow=fast
+    2*(p+c-x)=p+2c-x
+    by solving you get p=x
+    so that is why we make fast pointer from starting again so that distance between start to duplicate and from intersection to duplicate
+    is same
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int slow=nums[0];
+        int fast=nums[0];
+        do{
+            slow=nums[slow];
+            fast=nums[nums[fast]];
+        }while(slow!=fast);
+        fast=nums[0];
+        while(slow!=fast){
+            slow=nums[slow];
+            fast=nums[fast];
+        }
+        return slow;      
+    }
+}
+
+Time complexity - o(N)
+Space complexity - o(1)
+    
