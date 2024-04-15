@@ -41,3 +41,46 @@ public class Solution {
 
 Time complexity - o(N)
 Space complexity - o(N)
+
+Optimised approach -Math
+
+
+sum of N number - n*(n+1)/2 -y
+sum of squares of N numbers - n*(n+1)*(2*n+1)/6
+    x-y=sum of elements in array - sum of N elements
+    x2-y2=sum of squares of elemts in array - sum of squares of N elements
+
+    we can solve x and y by solving equation x and y are repeating and missing
+
+public class Solution {
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int N) {
+        // Write your code here
+        long n=N;
+       long s1=0;
+       long sn=(n*(n+1))/2;
+       long s2=0;
+       long s2n=(n*(n+1)*(2*n+1))/6;
+        for(int i=0;i<arr.size();i++){
+               s1=s1+arr.get(i);
+               s2+=arr.get(i) * arr.get(i);
+        }
+        //S-Sn = X-Y:
+        long val1 = s1-sn;
+
+        // S2-S2n = X^2-Y^2:
+        long val2 = s2-s2n;
+
+        //Find X+Y = (X^2-Y^2)/(X-Y):
+        val2 = val2 / val1;
+        //Find X and Y: X = ((X+Y)+(X-Y))/2 and Y = X-(X-Y),
+        // Here, X-Y = val1 and X+Y = val2:
+        long x = (val1 + val2) / 2;
+        long y = x - val1;
+
+        int[] ans = {(int)y, (int)x};
+        return ans;
+    }
+}
+
+Time complexity - o(N)
+Space complexity - o(1)
