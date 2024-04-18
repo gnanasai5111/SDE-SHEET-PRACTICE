@@ -25,7 +25,7 @@ class Solution {
     }
 }
 
-Time complexity - o(N*logN)
+Time complexity -  O((n+m)log⁡(n+m))
 Space complexity - o(1)
 
 Better approach :
