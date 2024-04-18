@@ -13,7 +13,6 @@ And Traverse the array and check if elements overlap and add it to array.
 class Solution {
     public int[][] merge(int[][] intervals) {
         List<List<Integer>> res=new ArrayList<>();
-         boolean mark[]=new boolean[intervals.length];
          Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0]));
             
         for(int i=0;i<intervals.length;i++){
