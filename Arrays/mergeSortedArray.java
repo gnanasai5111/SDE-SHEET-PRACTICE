@@ -18,30 +18,15 @@ Copy All the elements of both arrays into a single array and sort it
 
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int k=0;
-        int i=0;
-        int res[]=new int[nums1.length];
-        while(i<m){
-            res[i]=nums1[i];
-            k++;
-            i++;
+        for (int i = 0; i < n; i++) {
+            nums1[i + m] = nums2[i];
         }
-        i=0;
-        while(i<n){
-            res[k]=nums2[i];
-            k++;
-            i++;
-        }
-        for(int x=0;x<res.length;x++){
-            nums1[x]=res[x];
-        }
-        Arrays.sort(nums1);
-        
+        Arrays.sort(nums1);       
     }
 }
 
 Time complexity - o(N*logN)
-Space complexity - o(N)
+Space complexity - o(1)
 
 Better approach :
 
