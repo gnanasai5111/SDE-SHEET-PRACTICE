@@ -38,3 +38,59 @@ public class Solution {
 
 Time complexity - o(N*N)
 Space complexity - o(1)
+
+Optimised approach
+
+The steps are basically the same as they are in the case of the merge sort algorithm. 
+The change will be just a one-line addition inside the merge() function.
+Inside the merge(), we need to add the number of pairs to the count when a[left] > a[right].
+
+public class Solution {
+    public static long merge(long arr[],int low,int mid,int high){
+        int left=low;
+        int right=mid+1;
+        ArrayList<Long> sub=new ArrayList<>();
+        long count=0;
+        while(left<=mid && right<=high){
+            if(arr[left]>arr[right]){
+                count+=mid-left+1;
+                sub.add(arr[right]);
+                right++;
+            }
+            else{
+                sub.add(arr[left]);
+                left++;
+            }
+        }
+        while(left<=mid){
+            sub.add(arr[left]);
+            left++;
+        }
+        while(right<=high){
+            sub.add(arr[right]);
+            right++;
+        }
+        for(int i=low;i<=high;i++){
+            arr[i]=sub.get(i-low);
+        }
+        return count;
+    }
+    public static long divide(long arr[],int low,int high){
+        long count=0;
+        if(low==high){
+            return count;
+        }
+        int mid=(low+high)/2;
+        count+=divide(arr,low,mid);
+        count+=divide(arr,mid+1,high);
+        count+=merge(arr,low,mid,high);
+        return count;
+    }
+    public static long getInversions(long arr[], int n) {
+        // Write your code here.
+        return divide(arr,0,arr.length-1);
+    }
+} 
+
+Time complexity - o(N*logN)
+Space complexity - o(N)
