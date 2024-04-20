@@ -30,8 +30,8 @@ class Solution {
     }
 }
 
-Time complexity - o(N*N)
-Space complexity - o(N*N)
+Time complexity - o(N*2)
+Space complexity - o(N*2)
 
 
 OptimisedApproach -
@@ -60,5 +60,5 @@ class Solution {
     }
 }
 
-Time complexity - o(N*N)
+Time complexity - o(N*2)
 Space complexity - o(1)
