@@ -36,7 +36,7 @@ public class Solution {
     }
 }
 
-Time complexity - o(N*N)
+Time complexity - o(N*2)
 Space complexity - o(1)
 
 Optimised approach
@@ -91,6 +91,9 @@ public class Solution {
         return divide(arr,0,arr.length-1);
     }
 } 
+
+Time Complexity: O(N*logN)
+Space complexity - o(N)
 
 Time complexity - o(N*logN)
 Space complexity - o(N)
