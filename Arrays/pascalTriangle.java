@@ -29,7 +29,7 @@ class Solution {
     }
 }
 
-Time complexity - o(N*N)
+Time complexity - o(N*2)
 Space complexity - o(N)
 
 
@@ -61,5 +61,5 @@ class Solution {
     }
 }
 
-Time complexity - o(N*N)
+Time complexity - o(N*2)
 Space complexity - o(1)
