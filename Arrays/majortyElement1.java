@@ -91,3 +91,51 @@ class Solution {
 
 Time complexity - o(N)
 Space complexity - o(N)
+
+Optmised approach : Boyer-Moore Voting Algorithm
+
+If the array contains a majority element, its occurrence must be greater than the floor(N/2). 
+Now, we can say that the count of minority elements and majority elements is equal up to a certain point in the array.
+So when we traverse through the array we try to keep track of the count of elements and the element itself for which we
+are tracking the count. 
+
+After traversing the whole array, we will check the element stored in the variable.
+If the question states that the array must contain a majority element, the stored element will be that one but 
+if the question does not state so, then we need to check if the stored element is the
+majority element or not. If not, then the array does not contain any majority element.
+
+This alogorithm works because everyone get cancelled out when count equals to 0 so last element we get is the one with max count
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int ele=-1;
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            if(count==0){
+                count=1;
+                ele=nums[i];
+            }
+            else if(ele==nums[i]){
+                count++;
+            }
+            else{
+                count--;
+            }
+           
+        }
+        count=0;
+        for(int i=0;i<nums.length;i++){
+            if(ele==nums[i]){
+                count++;
+            }
+        }
+        if(count>nums.length/2){
+            return ele;
+        }
+        return -1;
+        
+    }
+}
+
+Time complexity - o(N)
+Space complexity - o(1)
