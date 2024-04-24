@@ -28,7 +28,7 @@ class Solution {
     }
 }
 
-Time complexity - o(N*2) - Time limit exceeded
+Time complexity - o(N^2) - Time limit exceeded
 Space complexity -o(1)
 
 Optimised approah : Kadanes algorithm
