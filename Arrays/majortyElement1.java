@@ -31,7 +31,7 @@ class Solution {
     }
 }
 
-Time complexity - o(N*2)
+Time complexity - o(N^2)
 Space complexity - o(N)
 
 Better approach :
