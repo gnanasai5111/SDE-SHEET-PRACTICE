@@ -36,7 +36,7 @@ public class Solution {
     }
 }
 
-Time complexity - o(N*2)
+Time complexity - o(N^2)
 Space complexity - o(1)
 
 Optimised approach
