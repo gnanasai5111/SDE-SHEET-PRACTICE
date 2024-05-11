@@ -82,7 +82,6 @@ meet is indeed equal to the distance between the starting point and head of the 
 
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        HashSet<ListNode> set=new HashSet<>();
         ListNode slow=head;
         ListNode fast=head;
         while(fast!=null && fast.next!=null){
