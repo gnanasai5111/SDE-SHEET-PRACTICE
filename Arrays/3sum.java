@@ -89,3 +89,59 @@ class Solution {
 
 Time complexity - o(N^2)
 Space complexity -  O(2 * no. of the unique triplets) 
+
+
+Optimised approach :
+
+First, we will sort the entire array.
+We will use a loop(say i) that will run from 0 to n-1. This i will represent the fixed pointer.
+In each iteration, this value will be fixed for all different values of the rest of the 2 pointers.
+Inside the loop, we will first check if the current and the previous element is the same and if it is we will do nothing and
+continue to the next value of i.
+After that, there will be 2 moving pointers i.e. j(starts from i+1) and k(starts from the last index).
+The pointer j will move forward and the pointer k will move backward until they cross each other while the value of i will be fixed.
+Now we will check the sum i.e. arr[i]+arr[j]+arr[k].
+If the sum is greater, then we need lesser elements and so we will decrease the value of k(i.e. k--). 
+If the sum is lesser than the target, we need a bigger value and so we will increase the value of j (i.e. j++). 
+If the sum is equal to the target, we will simply insert the triplet i.e. arr[i], arr[j], arr[k] into our answer and
+move the pointers j and k skipping the duplicate elements(i.e. by checking the adjacent elements while moving the pointers).
+Finally, we will have a list of unique triplets.
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res=new ArrayList<>();
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++){
+            if(i!=0 && nums[i]==nums[i-1]){
+                continue;
+            }
+            else{
+                int j=i+1;
+                int k=nums.length-1;
+                while(j<k){
+                    if(nums[i]+nums[j]+nums[k]>0){
+                        k--;
+                    }else if(nums[i]+nums[j]+nums[k]<0){
+                        j++;
+                    }
+                    else{
+                        List<Integer> temp = Arrays.asList(nums[i], nums[j], nums[k]);
+                        res.add(temp);
+                        j++;
+                        k--;
+                        while(j<k  && nums[j]==nums[j-1]){
+                            j++;
+                        }
+                        while(j<k  && nums[k]==nums[k+1]){
+                            k--;
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+}
+
+Time Complexity: O(NlogN)+O(N^2)
+Space Complexity: O(no. of quadruplets)
