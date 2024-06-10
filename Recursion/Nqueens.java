@@ -102,20 +102,20 @@ class Solution {
         return each;
     }
 
-    public void dfs(int col, char board[][], List<List<String>> res,int leftCol[],int lowerDiagonal[],int upperDiagonal[]) {
+    public void dfs(int col, char board[][], List<List<String>> res,int leftRow[],int lowerDiagonal[],int upperDiagonal[]) {
         if (col == board.length) {
             res.add(constructBoard(board));
             return;
         }
         for (int row = 0; row < board.length; row++) {
-            if (leftCol[row]==0 && lowerDiagonal[row+col]==0 && upperDiagonal[board.length - 1 + col - row] == 0) {
+            if (leftRow[row]==0 && lowerDiagonal[row+col]==0 && upperDiagonal[board.length - 1 + col - row] == 0) {
                 board[row][col] = 'Q';
-                leftCol[row]=1;
+                leftRow[row]=1;
                 lowerDiagonal[row+col]=1;
                 upperDiagonal[board.length - 1 + col - row] = 1;
-                dfs(col + 1, board, res, leftCol, lowerDiagonal, upperDiagonal);
+                dfs(col + 1, board, res, leftRow, lowerDiagonal, upperDiagonal);
                 board[row][col] = '.';
-                leftCol[row]=0;
+                leftRow[row]=0;
                 lowerDiagonal[row+col]=0;
                 upperDiagonal[board.length - 1 + col - row] = 0;
             }
@@ -129,11 +129,11 @@ class Solution {
                 board[i][j] = '.';
             }
         }
-        int leftCol[] = new int[n];
+        int leftRow[] = new int[n];
         int lowerDiagonal[] = new int[2 * n - 1];
         int upperDiagonal[] = new int[2 * n - 1];
         List<List<String>> res = new ArrayList<>();
-        dfs(0, board, res, leftCol, lowerDiagonal, upperDiagonal);
+        dfs(0, board, res, leftRow, lowerDiagonal, upperDiagonal);
         return res;
     }
 }
