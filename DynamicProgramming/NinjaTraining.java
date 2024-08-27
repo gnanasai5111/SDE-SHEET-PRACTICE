@@ -60,8 +60,8 @@ public class Solution {
 
 }
 
-Time complexity - O(N*4*3)
-Space complexity - O(N) + O(N*4)
+Time complexity - O(N*3*3)
+Space complexity - O(N) + O(N*3)
 
 Second approach - Memoization
 
@@ -90,5 +90,64 @@ public class Solution {
     }
 }
 
-Time complexity - O(N*4*3)
-Space complexity - O(N) + O(N*4)
+Time complexity - O(N*3*3)
+Space complexity - O(N) + O(N*3)
+
+
+Approach 3 :
+
+import java.util.*;
+public class Solution {
+    public static int ninjaTraining(int n, int points[][]) {
+       int[][] dp = new int[n][3];
+        dp[0][0] = Math.max(points[0][1],points[0][2]);
+        dp[0][1] = Math.max(points[0][0],points[0][2]);
+        dp[0][2] = Math.max(points[0][0],points[0][1]);
+        
+        // Fill the dp array iteratively
+        for (int day = 1; day < n; day++) {
+            for(int last=0;last<3;last++){
+                for(int task=0;task<3;task++){
+                    if(task!=last){
+                        dp[day][last]=Math.max(dp[day][last],dp[day-1][task]+points[day][task]);
+                    }
+                }
+            }
+        }
+        
+        return Math.max(dp[n - 1][0], Math.max(dp[n - 1][1], dp[n - 1][2]));
+    }
+}
+
+Time complexity - O(N*3*3)
+Space complexity -  O(N*3)
+
+Fourth approach - space optimised 
+
+import java.util.*;
+public class Solution {
+    public static int ninjaTraining(int n, int points[][]) {
+       int prev[] = new int[3];
+        prev[0] = Math.max(points[0][1], points[0][2]);
+        prev[1] = Math.max(points[0][0], points[0][2]);
+        prev[2] = Math.max(points[0][0], points[0][1]);
+        
+        // Fill the dp array iteratively
+        for (int day = 1; day < n; day++) {
+            int[] temp = new int[3];
+            for(int last=0;last<3;last++){
+                for(int task=0;task<3;task++){
+                    if(task!=last){
+                        temp[last]=Math.max(temp[last],prev[task]+points[day][task]);
+                    }
+                }
+            }
+            prev = temp;
+        }
+        
+        return Math.max(prev[0], Math.max(prev[1], prev[2]));
+    }
+}
+
+Time complexity - O(N*3*3)
+Space complexity -  O(3)
