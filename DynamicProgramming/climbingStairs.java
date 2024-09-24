@@ -27,7 +27,7 @@ class Solution {
     }
 }
 
-Time complexity - o(N)
+Time complexity - o(2^N)
 Space complexity - o(N)
 
 Second approach (Memoization)
