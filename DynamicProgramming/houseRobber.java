@@ -14,6 +14,12 @@ Total amount you can rob = 1 + 3 = 4.
 
 First approach : (Recursion - 1)
 
+- The first approach uses recursion to calculate the maximum amount of money you can rob.
+- Starting from the first house, it considers each house and makes a recursive call to calculate the maximum amount that can be 
+    robbed by either skipping or robbing the current house and moving to the next non-adjacent house. 
+- The base case checks if the index is out of bounds, in which case it returns 0. The time complexity is exponential since it explores
+    all combinations, resulting in O(2^N) time and O(N) space due to the recursion stack.
+
 class Solution {
     public int calculateMoney(int nums[], int index) {
         if (index >= nums.length) {
@@ -30,10 +36,14 @@ class Solution {
     }
 }
 
-Time complexity - o(N)
+Time complexity - o(2^N)
 Space complexity - o(N)
 
 (Recursion - 2)
+
+- In the second recursive approach, the problem is simplified by making two recursive calls: one to skip the current house and 
+    another to rob it, adding its value and moving to the next non-adjacent house.
+- The result of these two options is compared, and the maximum is returned.
 
 class Solution {
     public int calculateMoney(int nums[], int index) {
@@ -49,10 +59,16 @@ class Solution {
     }
 }
 
-Time complexity - o(N)
+Time complexity - o(2^N)
 Space complexity - o(N)
 
 Second approach : (Memoization-1) 
+
+- The first memoization approach optimizes the recursive solution by storing the results of subproblems in an array m[]. 
+- This way, each subproblem is solved only once, reducing redundant calculations.
+- The function checks if the result for a particular index is already computed and stored in m[].
+- If not, it computes the result recursively and stores it in the memoization array.
+- The time complexity improves to O(N), and the space complexity is also O(N) due to the memo array and recursion stack.
 
 class Solution {
     public int calculateMoney(int nums[], int index, int m[]) {
@@ -84,6 +100,11 @@ Space complexity - o(N)
 
 (Memoization-2) 
 
+- In the second memoization approach, a similar technique is applied, but instead of looping through all houses after the current index,
+  it directly compares skipping the current house or robbing it.
+- The result is stored in the memo array m[] to avoid recomputation. 
+- The time complexity remains O(N), and the space complexity is O(N) due to memoization and recursion.
+
 class Solution {
     public int calculateMoney(int nums[], int index,int m[]) {
         if (index >= nums.length) {
@@ -106,6 +127,12 @@ Time complexity - o(N)
 Space complexity - o(N)
 
 Third approach : Tabulation
+
+- The tabulation approach eliminates recursion by using dynamic programming with a bottom-up approach.
+- It initializes a dp[] array where each element represents the maximum amount that can be robbed up to that house.
+- Starting from the first two houses, it iterates through the array, updating the dp[] array with the maximum value either by 
+  robbing or skipping each house. 
+- The final result is stored in the last element of dp[]. The time complexity is O(N) and the space complexity is O(N).
 
 class Solution {
     public int rob(int[] nums) {
@@ -134,6 +161,12 @@ Time complexity - o(N)
 Space complexity - o(N)
 
 Fourth approach : Space optimised
+
+- In the space-optimized approach, instead of using a dp[] array, two variables are used to track the maximum money that can
+  be robbed up to the previous house and the house before that. 
+- This reduces the space complexity to O(1). 
+- The algorithm iterates through the array, updating these variables with the maximum value at each step, similar to the 
+  tabulation approach. The time complexity is O(N) with a space complexity of O(1).
 
 class Solution {
     public int rob(int[] nums) {
